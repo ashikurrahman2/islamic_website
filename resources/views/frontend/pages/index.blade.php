@@ -25,71 +25,51 @@
 {{-- Hero section --}}
     <div class="th-hero-wrapper hero-1" id="hero">
         <div class="swiper th-slider hero-slider-1" id="heroSlide1" data-slider-options='{"effect":"fade"}'>
-            <div class="swiper-wrapper">
+              <div class="swiper-wrapper">
+            @foreach($sliders as $slide)
                 <div class="swiper-slide">
                     <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="{{ asset('/') }}frontend/assets/img/hero/hero_1_1.jpg">
+                        <!-- Background Image -->
+                        <div class="th-hero-bg" 
+                             data-bg-src="{{ asset('storage/' . $slide->slide_image) }}">
+                             	{{-- <img class="hero-thumb"
+								src="{{ asset('storage/' . $hero->person_image) }}"
+								alt="{{ $hero->name ?? 'Banner Image' }}"> --}}
                         </div>
+
                         <div class="container">
                             <div class="hero-style1">
-                                <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s"><img src="{{ asset('/') }}frontend/assets/img/theme-img/sub-title.svg" alt=""></span>
+                                <!-- Sub Title Icon -->
+                                <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s">
+                                    <img src="{{ asset('/') }}frontend/assets/img/theme-img/sub-title.svg" alt="Sub Title">
+                                </span>
+
+                                <!-- Main Title -->
                                 <h1 class="hero-title" data-ani="slideinup" data-ani-delay="0.4s">
-                                    A Divine Call to Peace, Unity, and Right Path </h1>
-                                <p class="hero-text" data-ani="slideinup" data-ani-delay="0.6s">The story of Islam
-                                    begins
-                                    with the birth of Muhammad ibn Abdullah in Mecca, a city in the Arabian Peninsula. A
-                                    global civilization, profound cultural and scientific contributions.</p>
+                                    {{ $slide->slide_title ?? 'A Divine Call to Peace, Unity, and Right Path' }}
+                                </h1>
+
+                                <!-- Description -->
+                                <p class="hero-text" data-ani="slideinup" data-ani-delay="0.6s">
+                                    {{ $slide->slide_subtitle ?? 'The story of Islam begins with the birth of Muhammad ibn Abdullah in Mecca, a city in the Arabian Peninsula. A global civilization, profound cultural and scientific contributions.' }}
+                                </p>
+
+                                <!-- Buttons -->
                                 <div class="btn-group justify-content-center" data-ani="slideinup" data-ani-delay="0.8s">
-                                    <a href="service.html" class="th-btn style2"><span class="btn-text" data-back="Our Services" data-front="Our Services"></span> </a>
-                                    <a href="https://www.youtube.com/watch?v=eIrRj6vDddU" class="th-btn border-btn popup-video"> <i class="fas fa-play"></i><span class="btn-text" data-back="Listen Holy Quran" data-front="Listen Holy Quran"></span> </a>
+                                    <a href="{{ url('service') }}" class="th-btn style2">
+                                        <span class="btn-text" data-back="Our Services" data-front="Our Services"></span>
+                                    </a>
+                                    <a href="https://www.youtube.com  class="th-btn border-btn popup-video">
+                                        <i class="fas fa-play"></i>
+                                        <span class="btn-text" data-back="Listen Holy Quran" data-front="Listen Holy Quran"></span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="swiper-slide">
-                    <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="assets/img/hero/hero_1_2.jpg">
-                        </div>
-                        <div class="container">
-                            <div class="hero-style1">
-                                <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s"><img src="{{ asset('/') }}frontend/assets/img/theme-img/sub-title.svg" alt=""></span>
-                                <h1 class="hero-title" data-ani="slideinup" data-ani-delay="0.4s">
-                                    Strengthen Your Iman, One Step at a Time </h1>
-                                <p class="hero-text" data-ani="slideinup" data-ani-delay="0.6s">The story of Islam
-                                    begins
-                                    with the birth of Muhammad ibn Abdullah in Mecca, a city in the Arabian Peninsula. A
-                                    global civilization, profound cultural and scientific contributions.</p>
-                                <div class="btn-group justify-content-center" data-ani="slideinup" data-ani-delay="0.8s">
-                                    <a href="service.html" class="th-btn style2"><span class="btn-text" data-back="Our Services" data-front="Our Services"></span> </a>
-                                    <a href="https://www.youtube.com/watch?v=eIrRj6vDddU" class="th-btn border-btn popup-video"> <i class="fas fa-play"></i><span class="btn-text" data-back="Listen Holy Quran" data-front="Listen Holy Quran"></span> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <div class="hero-inner">
-                        <div class="th-hero-bg" data-bg-src="assets/img/hero/hero_1_3.jpg">
-                        </div>
-                        <div class="container">
-                            <div class="hero-style1">
-                                <span class="sub-title" data-ani="slideindown" data-ani-delay="0.2s"><img src="{{ asset('/') }}frontend/assets/img/theme-img/sub-title.svg" alt=""></span>
-                                <h1 class="hero-title" data-ani="slideinup" data-ani-delay="0.4s">
-                                    Connect with the Quran, Strengthen Your Deen </h1>
-                                <p class="hero-text" data-ani="slideinup" data-ani-delay="0.6s">The story of Islam
-                                    begins
-                                    with the birth of Muhammad ibn Abdullah in Mecca, a city in the Arabian Peninsula. A
-                                    global civilization, profound cultural and scientific contributions.</p>
-                                <div class="btn-group justify-content-center" data-ani="slideinup" data-ani-delay="0.8s">
-                                    <a href="service.html" class="th-btn style2"><span class="btn-text" data-back="Our Services" data-front="Our Services"></span> </a>
-                                    <a href="https://www.youtube.com/watch?v=eIrRj6vDddU" class="th-btn border-btn popup-video"> <i class="fas fa-play"></i><span class="btn-text" data-back="Listen Holy Quran" data-front="Listen Holy Quran"></span> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+        </div>
             <div class="swiper-pagination"></div>
             <button data-slider-prev="#heroSlide1" class="slider-arrow slider-prev"><i class="far fa-arrow-left"></i></button>
             <div class="swiper-pagination"></div>

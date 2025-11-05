@@ -4,11 +4,35 @@
                 <div class="row justify-content-center justify-content-md-between align-items-center">
                     <div class="col-auto d-none d-md-block">
                         <div class="header-links">
-                            <ul>
-                                <li><i class="fa-solid fa-calendar-days"></i><span>5 April 2025</span>
+                         <ul class="info-list">
+                            <li>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span>5 April 2025</span>
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-calendar-days"></i>
+                                <span>6 Rajab 1446</span>
+                            </li>      
+                             {{-- Weather section --}}
+                            @if($weather && isset($weather['current']))
+                                <li class="weather-item">
+                                    <img src="{{ $weather['current']['condition']['icon'] }}" 
+                                        alt="Weather" 
+                                        style="width: 20px; height: 20px; vertical-align: middle;">
+                                    <span>{{ round($weather['current']['temp_c']) }}°C, {{ $weather['current']
+                                      ['condition']['text'] }}</span>
                                 </li>
-                                <li><i class="fa-solid fa-calendar-days"></i>6 Rajab 1446</li>
-                            </ul>
+                                <li>
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <span>{{ $weather['location']['name'] }}, {{ $weather['location']['country'] }}</span>
+                                </li>
+                            @else
+                                <li>
+                                    <i class="fa-solid fa-cloud-slash"></i>
+                                    <span>Weather unavailable</span>
+                                </li>
+                            @endif
+                        </ul>
                         </div>
                     </div>
                     <div class="col-auto">
