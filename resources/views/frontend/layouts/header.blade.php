@@ -5,14 +5,28 @@
                     <div class="col-auto d-none d-md-block">
                         <div class="header-links">
                          <ul class="info-list">
-                            <li>
+                            {{-- English Date --}}
+                             <li>
                                 <i class="fa-solid fa-calendar-days"></i>
-                                <span>5 April 2025</span>
+                                <span>
+                                    @if($hijriDate)
+                                        {{ $hijriDate['gregorian_day'] }} {{ $hijriDate['gregorian_month'] }} {{ $hijriDate['gregorian_year'] }}
+                                    @else
+                                        {{ now()->format('d F Y') }}
+                                    @endif
+                                </span>
                             </li>
-                            <li>
-                                <i class="fa-solid fa-calendar-days"></i>
-                                <span>6 Rajab 1446</span>
-                            </li>      
+                            {{-- Arabic/Hijri Date --}}
+                           <li>
+                            <i class="fa-solid fa-calendar-days"></i>
+                            <span>
+                                @if($hijriDate)
+                                    {{ $hijriDate['hijri_day'] }} {{ $hijriDate['hijri_month'] }} {{ $hijriDate['hijri_year'] }}
+                                @else
+                                    6 Rajab 1446
+                                @endif
+                            </span>
+                        </li>    
                              {{-- Weather section --}}
                             @if($weather && isset($weather['current']))
                                 <li class="weather-item">
@@ -37,14 +51,32 @@
                     </div>
                     <div class="col-auto">
                         <div class="header-links">
-                            <ul>
-                                <li class=""><img src="assets/img/icon/light.svg" alt="">
-                                    <span>Sunrise At: <span class="fw-medium">6:20 AM</span></span>
-                                </li>
-                                <li class=""><img src="assets/img/icon/sunrise.svg" alt="">
-                                    <span>Sunset At: <span class="fw-medium"> 5:20 PM</span></span>
-                                </li>
-                            </ul>
+                       <ul>
+                        <li class="">
+                            <img src="{{ asset('/') }}frontend/assets/img/icon/light.svg" alt="">
+                            <span>Sunrise At: 
+                                <span class="fw-medium">
+                                    @if($astronomy && isset($astronomy['astronomy']['astro']['sunrise']))
+                                        {{ $astronomy['astronomy']['astro']['sunrise'] }}
+                                    @else
+                                        6:20 AM
+                                    @endif
+                                </span>
+                            </span>
+                        </li>
+                        <li class="">
+                            <img src="{{ asset('/') }}frontend/assets/img/icon/sunrise.svg" alt="">
+                            <span>Sunset At: 
+                                <span class="fw-medium">
+                                    @if($astronomy && isset($astronomy['astronomy']['astro']['sunset']))
+                                        {{ $astronomy['astronomy']['astro']['sunset'] }}
+                                    @else
+                                        5:20 PM
+                                    @endif
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
                         </div>
                     </div>
                 </div>
@@ -57,95 +89,16 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="home-al-noor-haven.html"><img src="assets/img/logo.svg" alt="Tawba"></a>
+                                <a href="home-al-noor-haven.html"><img src="{{ asset('/') }}frontend/assets/img/logo.svg" alt="Tawba"></a>
                             </div>
                         </div>
                         <div class="col-auto">
                             <nav class="main-menu d-none d-lg-inline-block">
                                 <ul>
-                                    <li class="menu-item-has-children">
-                                        <a href="home-al-noor-haven.html">Home</a>
-                                        <ul class="mega-menu mega-menu-content mega-scroll">
-                                            <li>
-                                                <div class="container">
-                                                    <div class="row gy-4">
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="assets/img/pages/home-eternal-guidance.jpg" alt="Home One">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-eternal-guidance.html" class="th-btn">View Demo</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-eternal-guidance.html">Home Eternal
-                                                                        Guidance</a>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="assets/img/pages/home-namaz-timings.jpg" alt="Home One">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-namaz-timings.html" class="th-btn">View Demo</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-namaz-timings.html">Home Namaz Timings</a>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="assets/img/pages/home-path-serenity.jpg" alt="Home Two">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-path-serenity.html" class="th-btn ">View Demo</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-path-serenity.html">Path of Serenity</a></h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="assets/img/pages/home-al-noor-haven.jpg" alt="Home Three">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-al-noor-haven.html" class="th-btn">View Demo</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-al-noor-haven.html">Home Al Noor Haven</a></h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="assets/img/pages/home-faithful-harmony.jpg" alt="Home Two">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-faithful-harmony.html" class="th-btn ">View Demo</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-faithful-harmony.html">Home Faithful
-                                                                        Harmony</a></h3>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="mega-menu-box">
-                                                                <div class="mega-menu-img">
-                                                                    <img src="assets/img/pages/home-pillar-of-blessings.jpg" alt="Home Three">
-                                                                    <div class="btn-wrap">
-                                                                        <a href="home-pillar-of-blessings.html" class="th-btn">View Demo</a>
-                                                                    </div>
-                                                                </div>
-                                                                <h3 class="mega-menu-title"><a href="home-pillar-of-blessings.html">Home pillar Of
-                                                                        Blessings</a></h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                    <li>
+                                        <a href="/">Home</a>
                                     </li>
-                                    <li><a href="about.html">About Us</a></li>
+                                    <li><a href="{{ route('abouts') }}">About Us</a></li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Service</a>
                                         <ul class="sub-menu">
@@ -203,7 +156,7 @@
                             <div class="header-button">
                                 <a href="contact.html" class="th-btn th-icon"><span class="btn-text" data-back="Donate Now" data-front="Donate Now"></span> </a>
                                 <button type="button" class="icon-btn searchBoxToggler"><i class="far fa-search"></i></button>
-                                <a href="#" class="icon-btn sideMenuToggler d-none d-lg-block"><img src="assets/img/icon/grid.svg" alt=""></a>
+                                <a href="#" class="icon-btn sideMenuToggler d-none d-lg-block"><img src="{{ asset('/') }}frontend/assets/img/icon/grid.svg" alt=""></a>
                             </div>
                         </div>
                     </div>
