@@ -127,4 +127,22 @@ class FrontendController extends Controller
                    $astronomy = $this->getAstronomy();
             return view('frontend.pages.about', compact('hijriDate', 'weather', 'astronomy'));
         }
+
+              // Service page 
+        public function Service()
+        {
+              $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                   $astronomy = $this->getAstronomy();
+            return view('frontend.pages.service', compact('hijriDate', 'weather', 'astronomy'));
+        }
+
+         // Service Details page 
+        public function Sdetails()
+        {
+              $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+            return view('frontend.pages.service_details', compact('hijriDate', 'weather', 'astronomy'));
+        }
 }

@@ -56,12 +56,8 @@
 
                                 <!-- Buttons -->
                                 <div class="btn-group justify-content-center" data-ani="slideinup" data-ani-delay="0.8s">
-                                    <a href="{{ url('service') }}" class="th-btn style2">
+                                    <a href="{{ route('service') }}" class="th-btn style2">
                                         <span class="btn-text" data-back="Our Services" data-front="Our Services"></span>
-                                    </a>
-                                    <a href="https://www.youtube.com  class="th-btn border-btn popup-video">
-                                        <i class="fas fa-play"></i>
-                                        <span class="btn-text" data-back="Listen Holy Quran" data-front="Listen Holy Quran"></span>
                                     </a>
                                 </div>
                             </div>

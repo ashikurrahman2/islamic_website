@@ -99,12 +99,8 @@
                                         <a href="/">Home</a>
                                     </li>
                                     <li><a href="{{ route('abouts') }}">About Us</a></li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Service</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="service.html">Services</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                        </ul>
+                                    <li>
+                                        <a href="{{ route('service') }}">Service</a>
                                     </li>
                                     <li class="menu-item-has-children">
                                         <a href="#">Courses</a>
@@ -126,17 +122,12 @@
                                                     <li><a href="wishlist.html">Wishlist</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                                            <li><a href="blog-list.html">Blog List</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
                                             <li><a href="islamic-scholars.html">Islamic Scholars</a></li>
                                             <li><a href="scholar-details.html">Islamic Scholars Details</a></li>
                                             <li><a href="charity.html">Charity Campaigns</a></li>
                                             <li><a href="charity-details.html">Charity Details</a></li>
                                             <li><a href="sermon.html">Sermons Archive</a></li>
                                             <li><a href="sermon-details.html">Sermon Details</a></li>
-                                            <li><a href="prayer-times.html">Prayer Times</a></li>
                                             <li><a href="event.html">Events Calendar</a></li>
                                             <li><a href="event-details.html">Event Details</a></li>
                                             <li><a href="faq.html">FAQ</a></li>
