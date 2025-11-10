@@ -31,7 +31,7 @@
                     <div class="hero-inner">
                         <!-- Background Image -->
                         <div class="th-hero-bg" 
-                             data-bg-src="{{ asset('storage/' . $slide->slide_image) }}">
+                             data-bg-src="{{ asset($slide->slide_image) }}">
                              	{{-- <img class="hero-thumb"
 								src="{{ asset('storage/' . $hero->person_image) }}"
 								alt="{{ $hero->name ?? 'Banner Image' }}"> --}}
@@ -56,7 +56,7 @@
 
                                 <!-- Buttons -->
                                 <div class="btn-group justify-content-center" data-ani="slideinup" data-ani-delay="0.8s">
-                                    <a href="{{ route('service') }}" class="th-btn style2">
+                                    <a href="#" class="th-btn style2">
                                         <span class="btn-text" data-back="Our Services" data-front="Our Services"></span>
                                     </a>
                                 </div>

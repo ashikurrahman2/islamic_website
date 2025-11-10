@@ -34,3 +34,34 @@
 
     <!-- Main Js File -->
     <script src="{{ asset('/') }}frontend/assets/js/main.js"></script>
+
+    {{-- Hajj package script --}}
+    <script>
+        // Add scroll animation trigger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.package-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Button click animations
+        document.querySelectorAll('.btn-call, .btn-download').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 200);
+            });
+        });
+    </script>

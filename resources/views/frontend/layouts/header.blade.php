@@ -98,41 +98,41 @@
                                     <li>
                                         <a href="/">Home</a>
                                     </li>
-                                    <li><a href="{{ route('abouts') }}">About Us</a></li>
-                                    <li>
-                                        <a href="{{ route('service') }}">Service</a>
-                                    </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Courses</a>
+
+                                            <li class="menu-item-has-children">
+                                        <a href="#">ABOUT</a>
                                         <ul class="sub-menu">
-                                            <li><a href="popular-courses.html">Popular-courses</a></li>
-                                            <li><a href="courses-details.html">Courses Details</a></li>
+                                          <li><a href="{{ route('abouts') }}">About Us</a></li>
+                                            <li><a href="{{ route('gel') }}">Gallery</a></li>
                                         </ul>
                                     </li>
-                                    <li class="menu-item-has-children">
-                                        <a href="#">Pages</a>
+                                    
+                                           <li class="menu-item-has-children">
+                                        <a href="#">HAJJ</a>
                                         <ul class="sub-menu">
-                                            <li class="menu-item-has-children">
-                                                <a href="#">Shop</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="shop.html">Islamic Shop</a></li>
-                                                    <li><a href="shop-details.html">Shop Details</a></li>
-                                                    <li><a href="cart.html">Cart Page</a></li>
-                                                    <li><a href="checkout.html">Checkout</a></li>
-                                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="islamic-scholars.html">Islamic Scholars</a></li>
-                                            <li><a href="scholar-details.html">Islamic Scholars Details</a></li>
-                                            <li><a href="charity.html">Charity Campaigns</a></li>
-                                            <li><a href="charity-details.html">Charity Details</a></li>
-                                            <li><a href="sermon.html">Sermons Archive</a></li>
-                                            <li><a href="sermon-details.html">Sermon Details</a></li>
-                                            <li><a href="event.html">Events Calendar</a></li>
-                                            <li><a href="event-details.html">Event Details</a></li>
-                                            <li><a href="faq.html">FAQ</a></li>
-                                            <li><a href="gallery.html">Gallery</a></li>
-                                            <li><a href="error.html">Error Page</a></li>
+                                            <li><a href="{{ route('pre.reg') }}">Pre-registration</a></li>
+                                            <li><a href="courses-details.html">VISA Requirement</a></li>
+                                            <li><a href="{{ route('hajj.pack') }}">Package</a></li>
+                                            <li><a href="courses-details.html">Significance</a></li>
+                                        </ul>
+                                    </li>
+
+                                         <li class="menu-item-has-children">
+                                        <a href="#">UMRAH</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="courses-details.html">VISA Requirement</a></li>
+                                            <li><a href="courses-details.html">Package</a></li>
+                                            <li><a href="courses-details.html">Significance</a></li>
+                                        </ul>
+                                    </li>
+
+                                          <li class="menu-item-has-children">
+                                        <a href="#">ASSISTANCE</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="courses-details.html">Free Consultation</a></li>
+                                            <li><a href="courses-details.html">Air ticket booking</a></li>
+                                            <li><a href="courses-details.html">Haji & Umrah Training</a></li>
+                                            <li><a href="courses-details.html">VISA Processing</a></li>
                                         </ul>
                                     </li>
 

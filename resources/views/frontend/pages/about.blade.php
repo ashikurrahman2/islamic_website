@@ -3,6 +3,20 @@
 @section('title', 'About')
 
 @section('content')
+   <div class="breadcumb-wrapper " data-bg-src="{{ asset('/') }}frontend/assets/img/bg/breadcumb-bg.jpg">
+        <div class="container">
+            <div class="breadcumb-content">
+                <h1 class="breadcumb-title mt-5">About page</h1>
+                <ul class="breadcumb-menu">
+                    <li><a href="/">Home</a></li>
+                    <li>About</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+
   <div class="about-area space-bottom" id="about-sec">
         <div class="container">
             <div class="row gy-4">
