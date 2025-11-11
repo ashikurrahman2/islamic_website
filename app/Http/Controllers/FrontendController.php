@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\HajjDocument;
-use App\Models\HajjPackage;           // এই লাইন যোগ করুন
+use App\Models\VisaRequirement;
+use App\Models\HajjPackage;           
 use Barryvdh\DomPDF\Facade\Pdf;   
 use Illuminate\Support\Str;   
 
@@ -132,7 +133,7 @@ class FrontendController extends Controller
         $hijriDate = $this->getHijriDate();
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
-        $packages = HajjPackage::all(); // ঠিক করা হয়েছে
+        $packages = HajjPackage::all(); 
 
         return view('frontend.pages.hajj_package', compact('hijriDate', 'packages', 'weather', 'astronomy'));
     }
@@ -148,5 +149,18 @@ public function downloadPdf($id)
     $fileName = Str::slug($package->title) . '-hajj-package-2026.pdf';
 
     return $pdf->download($fileName);
-}
+   }
+
+     // Significance Page
+     public function sign()
+     {
+            $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+        $packages = HajjPackage::all(); 
+
+        return view('frontend.pages.significance', compact('hijriDate', 'packages', 'weather', 'astronomy'));
+    }
+     
+
 }

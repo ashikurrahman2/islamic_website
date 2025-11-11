@@ -439,4 +439,188 @@
             animation: rotateIn 0.8s ease-out, float 3s ease-in-out infinite;
         }
 
+        /* Significance design code  */
+
+         :root {
+            --primary-green: #2ecc71;
+            --dark-green: #27ae60;
+            --text-dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: #f8f9fa;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--dark-green) 100%);
+            color: white;
+            padding: 80px 0 60px;
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .hero-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .hajj-guide-card {
+            background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            border-radius: 20px;
+            padding: 40px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+        }
+
+        .guide-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .guide-path {
+            position: relative;
+            height: 500px;
+        }
+
+        .guide-step {
+            position: absolute;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .guide-step:hover {
+            transform: scale(1.1);
+        }
+
+        .step-number {
+            background: white;
+            color: var(--primary-green);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .step-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.3;
+            max-width: 120px;
+            margin: 0 auto;
+        }
+
+        /* Positioning for each step in circular pattern */
+        .step-1 { top: 10%; right: 15%; }
+        .step-2 { top: 5%; right: 35%; }
+        .step-3 { top: 20%; right: 55%; }
+        .step-4 { top: 45%; right: 65%; }
+        .step-5 { top: 70%; right: 60%; }
+        .step-6 { bottom: 5%; right: 45%; }
+        .step-7 { bottom: 10%; right: 25%; }
+        .step-8 { bottom: 20%; right: 5%; }
+        .step-9 { top: 55%; left: 10%; }
+        .step-10 { top: 30%; left: 5%; }
+        .step-11 { top: 10%; left: 15%; }
+        .step-12 { top: 0%; left: 35%; }
+
+        .kaaba-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .section-title {
+            color: var(--dark-green);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 60px 0 40px;
+            text-align: center;
+        }
+
+        .step-detail-card {
+            background: white;
+            border-left: 4px solid var(--primary-green);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-detail-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .step-detail-card h3 {
+            color: var(--dark-green);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .step-detail-card p {
+            margin: 0;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .guide-title {
+                font-size: 2rem;
+            }
+
+            .hajj-guide-card {
+                min-height: 400px;
+                padding: 20px;
+            }
+
+            .guide-path {
+                height: 350px;
+            }
+
+            .step-icon {
+                font-size: 1.5rem;
+            }
+
+            .step-label {
+                font-size: 0.7rem;
+                max-width: 80px;
+            }
+
+            .kaaba-center {
+                font-size: 2.5rem;
+            }
+        }
+
     </style>

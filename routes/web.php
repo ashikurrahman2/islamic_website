@@ -11,4 +11,6 @@ use App\Http\Controllers\FrontendController;
     Route::get('/pre-ragistration', [FrontendController::class, 'Pre'])->name('pre.reg');
     Route::get('/hajj-package', [FrontendController::class, 'Pack'])->name('hajj.pack');
     Route::get('/hajj-package/download/{id}', [FrontendController::class, 'downloadPdf'])->name('package.download');
+    Route::get('/Visa-requirement', [FrontendController::class, 'VISA'])->name('visa.req');
+    Route::get('/significance', [FrontendController::class, 'sign'])->name('sign.req');
   

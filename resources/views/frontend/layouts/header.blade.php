@@ -111,9 +111,9 @@
                                         <a href="#">HAJJ</a>
                                         <ul class="sub-menu">
                                             <li><a href="{{ route('pre.reg') }}">Pre-registration</a></li>
-                                            <li><a href="courses-details.html">VISA Requirement</a></li>
+                                            <li><a href="{{ route('visa.req') }}">VISA Requirement</a></li>
                                             <li><a href="{{ route('hajj.pack') }}">Package</a></li>
-                                            <li><a href="courses-details.html">Significance</a></li>
+                                            <li><a href="{{ route('sign.req') }}">Significance</a></li>
                                         </ul>
                                     </li>
 
