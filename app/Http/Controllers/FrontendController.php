@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\HajjDocument;
 use App\Models\HajjPackage;           // এই লাইন যোগ করুন
-use Barryvdh\DomPDF\Facade\Pdf;      // এই লাইন যোগ করুন
+use Barryvdh\DomPDF\Facade\Pdf;   
+use Illuminate\Support\Str;   
 
 class FrontendController extends Controller
 {
@@ -137,15 +138,15 @@ class FrontendController extends Controller
     }
 
     // Package PDF Download
-    public function downloadPdf($id)
-    {
-        $package = HajjPackage::findOrFail($id);
+public function downloadPdf($id)
+{
+    $package = HajjPackage::findOrFail($id);
 
-        $pdf = Pdf::loadView('pdf.hajj-package', compact('package'))
-            ->setPaper('a4', 'portrait');
+    $pdf = Pdf::loadView('frontend.pages.pdf.hajj-package', compact('package'))
+        ->setPaper('a4', 'portrait');
 
-        return response()->streamDownload(function () use ($pdf) {
-            echo $pdf->stream();
-        }, \Illuminate\Support\Str::slug($package->title) . '-hajj-package-2026.pdf');
-    }
+    $fileName = Str::slug($package->title) . '-hajj-package-2026.pdf';
+
+    return $pdf->download($fileName);
+}
 }

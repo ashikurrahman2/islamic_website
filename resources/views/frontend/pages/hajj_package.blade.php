@@ -17,13 +17,10 @@
 
     </div>
 
-
-  <!-- Header Section -->
-{{-- resources/views/livewire/hajj-packages.blade.php --}}
 <<!-- Header Section -->
 <div class="header-section">
     <div class="container">
-        <h1>Your Journey to Makkah: Explore As-Sunnah Travels 2026 Hajj Fixed & Shifting Packages</h1>
+        <h1 class="text-light">Your Journey to Makkah: Explore As-Sunnah Travels 2026 Hajj Fixed & Shifting Packages</h1>
         <p>Choose the perfect package for your spiritual journey</p>
     </div>
 </div>
@@ -61,9 +58,19 @@
                         CALL NOW
                     </a>
 
-                    <a href="{{ route('package.download', $package->id) }}" class="btn btn-download">
-                        DOWNLOAD PACKAGE DETAILS
+                        @if($package->pdf_path)
+                            <a href="{{ route('package.download', $package->id) }}" class="btn btn-download">
+                            <i class="fas fa-download"></i> DOWNLOAD PACKAGE DETAILS
                     </a>
+                    <!-- PREVIEW BUTTON  -->
+                    <a href="{{ Storage::url($package->pdf_path) }}" target="_blank" class="btn btn-sm btn-info mt-2">
+                        <i class="fas fa-eye"></i> Preview PDF
+                    </a>
+                @else
+                    <button class="btn btn-download" disabled>
+                        PDF NOT AVAILABLE
+                    </button>
+                @endif
 
                     <p class="terms-text">*Terms & Conditions Applicable</p>
                 </div>
