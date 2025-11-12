@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use App\Models\HajjDocument;
 use App\Models\VisaRequirement;
 use App\Models\HajjPackage;           
+use App\Models\HajjSignificance;           
+use App\Models\UmrahSignificance;           
 use Barryvdh\DomPDF\Facade\Pdf;   
 use Illuminate\Support\Str;   
 
@@ -154,13 +156,32 @@ public function downloadPdf($id)
      // Significance Page
      public function sign()
      {
-            $hijriDate = $this->getHijriDate();
+        $hijriDate = $this->getHijriDate();
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
-        $packages = HajjPackage::all(); 
+          $significance = HajjSignificance::with('activeSteps')
+            ->where('is_active', true)
+            ->first();
 
-        return view('frontend.pages.significance', compact('hijriDate', 'packages', 'weather', 'astronomy'));
+        if (!$significance) {
+            abort(404, 'Hajj Significance page not found');
+        }
+        return view('frontend.pages.significance', compact('hijriDate', 'significance', 'weather', 'astronomy'));
     }
-     
 
+      //Umrah Significance Page
+     public function umrahsign()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+          $significance = UmrahSignificance::with('activeSteps')
+            ->where('is_active', true)
+            ->first();
+
+        if (!$significance) {
+            abort(404, 'Umrah Significance page not found');
+        }
+        return view('frontend.pages.umrah_significance', compact('hijriDate', 'significance', 'weather', 'astronomy'));
+    }
 }

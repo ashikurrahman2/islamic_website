@@ -13,4 +13,5 @@ use App\Http\Controllers\FrontendController;
     Route::get('/hajj-package/download/{id}', [FrontendController::class, 'downloadPdf'])->name('package.download');
     Route::get('/Visa-requirement', [FrontendController::class, 'VISA'])->name('visa.req');
     Route::get('/significance', [FrontendController::class, 'sign'])->name('sign.req');
+    Route::get('/umrah-significance', [FrontendController::class, 'umrahsign'])->name('umrahsign.req');
   

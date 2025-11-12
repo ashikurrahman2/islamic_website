@@ -1,16 +1,16 @@
 @extends('frontend.app')
 
-@section('title', 'Significance')
+@section('title', 'Umrah Significance')
 
 @section('content')
 {{-- Breadcumb --}}
 <div class="breadcumb-wrapper" data-bg-src="{{ asset('/') }}frontend/assets/img/bg/breadcumb-bg.jpg">
     <div class="container">
         <div class="breadcumb-content">
-            <h1 class="breadcumb-title mt-5">Significance</h1>
+            <h1 class="breadcumb-title mt-5">Umrah Significance</h1>
             <ul class="breadcumb-menu">
                 <li><a href="/">Home</a></li>
-                <li>Significance</li>
+                <li>Umrah Significance</li>
             </ul>
         </div>
     </div>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class HajjPackage extends Model
 {
-    // নিরাপত্তার জন্য fillable ব্যবহার করুন
+    
     protected $fillable = [
         'title',
         'type',
