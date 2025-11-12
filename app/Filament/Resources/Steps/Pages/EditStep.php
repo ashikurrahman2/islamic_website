@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\UmrahSteps\Pages;
+namespace App\Filament\Resources\Steps\Pages;
 
-use App\Filament\Resources\UmrahSteps\UmrahStepResource;
+use App\Filament\Resources\Steps\StepResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
-class EditUmrahStep extends EditRecord
+class EditStep extends EditRecord
 {
-    protected static string $resource = UmrahStepResource::class;
+    protected static string $resource = StepResource::class;
 
     protected function getHeaderActions(): array
     {

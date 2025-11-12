@@ -175,9 +175,7 @@ public function downloadPdf($id)
         $hijriDate = $this->getHijriDate();
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
-          $significance = UmrahSignificance::with('activeSteps')
-            ->where('is_active', true)
-            ->first();
+         $significance = UmrahSignificance::with('activeSteps')->firstOrFail();
 
         if (!$significance) {
             abort(404, 'Umrah Significance page not found');

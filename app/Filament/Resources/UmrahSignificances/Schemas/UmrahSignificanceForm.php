@@ -19,19 +19,16 @@ class UmrahSignificanceForm
                     ->required()
                     ->columnSpanFull(),
                 Textarea::make('description_two')
-                    ->required()
                     ->columnSpanFull(),
                 TextInput::make('guide_title')
-                    ->required()
-                    ->default('The Umrah Guide'),
-                TextInput::make('section_title')
-                    ->required()
-                    ->default('Step by Step Hajj Guide'),
-                TextInput::make('section_description')
                     ->required(),
-                TextInput::make('congratulation_message')
+                TextInput::make('section_title')
+                    ->required(),
+                Textarea::make('section_description')
                     ->required()
-                    ->default('Haji Mubarak'),
+                    ->columnSpanFull(),
+                TextInput::make('congratulation_message')
+                    ->required(),
                 Toggle::make('is_active')
                     ->required(),
             ]);

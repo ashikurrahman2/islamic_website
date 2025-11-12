@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\UmrahSteps\Tables;
+namespace App\Filament\Resources\Umrahpackages\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -9,24 +9,33 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class UmrahStepsTable
+class UmrahpackagesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('umrahSignificance.title')
+                TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('step_number')
-                    ->numeric()
+                TextColumn::make('type')
+                    ->searchable(),
+                TextColumn::make('price')
+                    ->money()
                     ->sortable(),
-                TextColumn::make('step_icon')
+                TextColumn::make('duration')
                     ->searchable(),
-                TextColumn::make('detail_title')
+                TextColumn::make('flight')
                     ->searchable(),
-                TextColumn::make('order')
-                    ->numeric()
-                    ->sortable(),
+                TextColumn::make('hotel_makkah')
+                    ->searchable(),
+                TextColumn::make('hotel_madinah')
+                    ->searchable(),
+                TextColumn::make('food')
+                    ->searchable(),
+                TextColumn::make('icon_class')
+                    ->searchable(),
+                TextColumn::make('pdf_path')
+                    ->searchable(),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
