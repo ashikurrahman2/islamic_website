@@ -7,6 +7,7 @@ use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Storage;
 use Filament\Tables\Table;
 
 class UmrahpackagesTable
@@ -35,7 +36,13 @@ class UmrahpackagesTable
                 TextColumn::make('icon_class')
                     ->searchable(),
                 TextColumn::make('pdf_path')
-                    ->searchable(),
+                    ->label('PDF')
+                    ->formatStateUsing(fn ($state) => $state ? 'PDF' : '—') // টেক্সট দেখাবে
+                    ->url(fn ($record) => $record->pdf_path ? Storage::url($record->pdf_path) : null)
+                    ->openUrlInNewTab()
+                    ->color(fn ($record) => $record->pdf_path ? 'primary' : 'gray')
+                    ->alignCenter()
+                    ->tooltip(fn ($record) => $record->pdf_path ? 'Download PDF' : 'No PDF'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')

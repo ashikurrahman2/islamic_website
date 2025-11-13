@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use App\Models\HajjDocument;
 use App\Models\VisaRequirement;
 use App\Models\HajjPackage;           
+use App\Models\UmrahPackage;           
 use App\Models\HajjSignificance;           
 use App\Models\UmrahSignificance;           
 use Barryvdh\DomPDF\Facade\Pdf;   
@@ -182,4 +183,32 @@ public function downloadPdf($id)
         }
         return view('frontend.pages.umrah_significance', compact('hijriDate', 'significance', 'weather', 'astronomy'));
     }
+
+       //    Umrah package
+       public function umrahpack()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+         $packages = UmrahPackage::all();
+
+        if (!$packages) {
+            abort(404, 'Umrah packages page not found');
+        }
+        return view('frontend.pages.umrah_package', compact('hijriDate', 'packages', 'weather', 'astronomy'));
+    }
+
+          // Visa requirement 
+       public function VISA()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+          $visaRequirement = VisaRequirement::where('is_active', true)->first();
+               if (!$visaRequirement) {
+            abort(404, 'VISA requirement page not found');
+        }
+        return view('frontend.pages.visa_requirement', compact('hijriDate', 'visaRequirement', 'weather', 'astronomy'));
+    }
+  
 }

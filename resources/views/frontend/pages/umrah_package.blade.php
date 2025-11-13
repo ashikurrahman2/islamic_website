@@ -1,13 +1,13 @@
 @extends('frontend.app')
 
-@section('title', 'Hajj Package')
+@section('title', 'Umrah Package')
 
 @section('content')
 
    <div class="breadcumb-wrapper " data-bg-src="{{ asset('/') }}frontend/assets/img/bg/breadcumb-bg.jpg">
         <div class="container">
             <div class="breadcumb-content">
-                <h1 class="breadcumb-title mt-5">Hajj Package</h1>
+                <h1 class="breadcumb-title mt-5">Umrah Package</h1>
                 <ul class="breadcumb-menu">
                     <li><a href="/">Home</a></li>
                     <li>Package</li>
@@ -18,10 +18,10 @@
     </div>
 
 <<!-- Header Section -->
-<div class="header-section">
+<div class="header-section" style="background: rgb(224, 224, 35);">
     <div class="container">
-        <h1 class="text-light">Your Journey to Makkah: Explore As-Sunnah Travels 2026 Hajj Fixed & Shifting Packages</h1>
-        <p>Choose the perfect package for your spiritual journey</p>
+        <h1 class="text-dark">Your Journey to Makkah: Explore As-Sunnah Travels {{ date('Y') }} Umrah Fixed & Shifting Packages</h1>
+        <p>Choose the perfect Umrah package for your spiritual journey</p>
     </div>
 </div>
 

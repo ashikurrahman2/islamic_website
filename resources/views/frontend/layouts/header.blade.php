@@ -121,7 +121,7 @@
                                         <a href="#">UMRAH</a>
                                         <ul class="sub-menu">
                                             <li><a href="courses-details.html">VISA Requirement</a></li>
-                                            <li><a href="courses-details.html">Package</a></li>
+                                            <li><a href="{{ route('umrah.pack') }}">Package</a></li>
                                             <li><a href="{{ route('umrahsign.req') }}">Significance</a></li>
                                         </ul>
                                     </li>

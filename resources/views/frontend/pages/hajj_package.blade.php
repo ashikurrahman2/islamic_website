@@ -20,7 +20,7 @@
 <<!-- Header Section -->
 <div class="header-section">
     <div class="container">
-        <h1 class="text-light">Your Journey to Makkah: Explore As-Sunnah Travels 2026 Hajj Fixed & Shifting Packages</h1>
+        <h1 class="text-light">Your Journey to Makkah: Explore As-Sunnah Travels {{ date('Y') }} Hajj Fixed & Shifting Packages</h1>
         <p>Choose the perfect package for your spiritual journey</p>
     </div>
 </div>

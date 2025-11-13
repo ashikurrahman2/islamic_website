@@ -14,4 +14,6 @@ use App\Http\Controllers\FrontendController;
     Route::get('/Visa-requirement', [FrontendController::class, 'VISA'])->name('visa.req');
     Route::get('/significance', [FrontendController::class, 'sign'])->name('sign.req');
     Route::get('/umrah-significance', [FrontendController::class, 'umrahsign'])->name('umrahsign.req');
+    Route::get('/umrah-package', [FrontendController::class, 'umrahpack'])->name('umrah.pack');
+   
   

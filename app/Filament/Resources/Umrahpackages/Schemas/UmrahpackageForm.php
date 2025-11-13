@@ -24,7 +24,7 @@ class UmrahpackageForm
                 TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
+                    ->prefix('৳'),
                 TextInput::make('duration')
                     ->required(),
                 TextInput::make('flight')
