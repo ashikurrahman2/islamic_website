@@ -15,5 +15,6 @@ use App\Http\Controllers\FrontendController;
     Route::get('/significance', [FrontendController::class, 'sign'])->name('sign.req');
     Route::get('/umrah-significance', [FrontendController::class, 'umrahsign'])->name('umrahsign.req');
     Route::get('/umrah-package', [FrontendController::class, 'umrahpack'])->name('umrah.pack');
+    Route::get('/contact', [FrontendController::class, 'commu'])->name('cont.pack');
    
   

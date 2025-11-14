@@ -136,7 +136,7 @@
                                         </ul>
                                     </li>
 
-                                    <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="{{ route('cont.pack') }}">Contact Us</a></li>
                                 </ul>
                             </nav>
                             <div class="header-button">

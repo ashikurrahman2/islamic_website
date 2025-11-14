@@ -210,5 +210,18 @@ public function downloadPdf($id)
         }
         return view('frontend.pages.visa_requirement', compact('hijriDate', 'visaRequirement', 'weather', 'astronomy'));
     }
+
+            // Contact page 
+       public function commu()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+        //   $visaRequirement = VisaRequirement::where('is_active', true)->first();
+        //        if (!$visaRequirement) {
+        //     abort(404, 'VISA requirement page not found');
+        // }
+        return view('frontend.pages.contact', compact('hijriDate', 'weather', 'astronomy'));
+    }
   
 }
