@@ -1,5 +1,8 @@
   <header class="th-header header-layout1 header-absolute">
-        <div class="header-top">
+      @php
+        $setting = \App\Models\Settings::first();
+    @endphp
+        <div class="header-top bg-success">
             <div class="container">
                 <div class="row justify-content-center justify-content-md-between align-items-center">
                     <div class="col-auto d-none d-md-block">
@@ -89,8 +92,14 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="home-al-noor-haven.html"><img src="{{ asset('/') }}frontend/assets/img/logo.svg" alt="Tawba"></a>
-                            </div>
+    <a href="{{ url('/') }}">
+        @if($setting && $setting->web_logo)
+            <img src="{{ asset('storage/' . $setting->web_logo) }}" alt="Mosque Logo">
+        @else
+            <img src="{{ asset('/') }}frontend/assets/img/logo.svg" alt="Tawba">
+        @endif
+    </a>
+</div>
                         </div>
                         <div class="col-auto">
                             <nav class="main-menu d-none d-lg-inline-block">
@@ -129,7 +138,7 @@
                                           <li class="menu-item-has-children">
                                         <a href="#">ASSISTANCE</a>
                                         <ul class="sub-menu">
-                                            <li><a href="courses-details.html">Free Consultation</a></li>
+                                            <li><a href="{{ route('sult.pack') }}">Free Consultation</a></li>
                                             <li><a href="courses-details.html">Air ticket booking</a></li>
                                             <li><a href="courses-details.html">Haji & Umrah Training</a></li>
                                             <li><a href="courses-details.html">VISA Processing</a></li>
@@ -145,7 +154,7 @@
                         </div>
                         <div class="col-auto d-none d-xl-block">
                             <div class="header-button">
-                                <a href="contact.html" class="th-btn th-icon"><span class="btn-text" data-back="Donate Now" data-front="Donate Now"></span> </a>
+                                <a href="{{ route('cont.pack') }}" class="th-btn th-icon"><span class="btn-text" data-back="Donate Now" data-front="Donate Now"></span> </a>
                                 <button type="button" class="icon-btn searchBoxToggler"><i class="far fa-search"></i></button>
                                 <a href="#" class="icon-btn sideMenuToggler d-none d-lg-block"><img src="{{ asset('/') }}frontend/assets/img/icon/grid.svg" alt=""></a>
                             </div>

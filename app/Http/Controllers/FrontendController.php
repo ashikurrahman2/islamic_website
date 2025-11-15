@@ -11,6 +11,7 @@ use App\Models\HajjPackage;
 use App\Models\UmrahPackage;           
 use App\Models\HajjSignificance;           
 use App\Models\UmrahSignificance;           
+use App\Models\Settings;           
 use Barryvdh\DomPDF\Facade\Pdf;   
 use Illuminate\Support\Str;   
 
@@ -217,11 +218,26 @@ public function downloadPdf($id)
         $hijriDate = $this->getHijriDate();
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
-        //   $visaRequirement = VisaRequirement::where('is_active', true)->first();
-        //        if (!$visaRequirement) {
-        //     abort(404, 'VISA requirement page not found');
+        $setting = \App\Models\Settings::first();
+        
+         if (!$setting) {
+            abort(404, 'Contact page not found');
+        }
+        return view('frontend.pages.contact', compact('hijriDate','weather', 'setting', 'astronomy'));
+    }
+
+            // Free consultation page 
+       public function Con()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+        // $setting = \App\Models\Settings::first();
+        
+        //  if (!$setting) {
+        //     abort(404, 'Contact page not found');
         // }
-        return view('frontend.pages.contact', compact('hijriDate', 'weather', 'astronomy'));
+        return view('frontend.pages.consultation', compact('hijriDate','weather', 'astronomy'));
     }
   
 }

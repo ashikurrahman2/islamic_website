@@ -4,12 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Contact extends Model
+class Settings extends Model
 {
-    protected $fillable = [
+      protected $fillable = [
+        'web_logo',
+        'favicon',
         'address',
-        'number',
+        'phone_number',
+        'alt_phone_number',
         'email',
+        'alt_email',
         'map_embed_url',
     ];
 

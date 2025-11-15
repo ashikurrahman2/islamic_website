@@ -27,7 +27,7 @@
                         </div>
                         <div class="media-body">
                             <h5 class="box-title">Mosque Address</h5>
-                            <p class="box-text">123 Academic Way City, State, 1234, New York City.</p>
+                            <p class="box-text">{{ $setting->address ?? '123 Academic Way City, State, 1234, New York City.' }}</p>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,17 @@
                         <div class="media-body">
                             <h5 class="box-title">Phone Number</h5>
                             <p class="box-text">
-                                <a href="tel:+011123234567890">+011 (123) 234 567 890</a>
-                                <a href="tel:+09456876543210">+09 (456) 876 543 210</a>
+                                @if($setting && $setting->phone_number)
+                                    <a href="tel:{{ preg_replace('/\D+/', '', $setting->phone_number) }}">{{ $setting->phone_number }}</a>
+                                @else
+                                    <a href="tel:+011123234567890">+011 (123) 234 567 890</a>
+                                @endif
+                                
+                                @if($setting && $setting->alt_phone_number)
+                                    <a href="tel:{{ preg_replace('/\D+/', '', $setting->alt_phone_number) }}">{{ $setting->alt_phone_number }}</a>
+                                @else
+                                    <a href="tel:+09456876543210">No number</a>
+                                @endif
                             </p>
                         </div>
                     </div>
@@ -53,19 +62,26 @@
                         <div class="media-body">
                             <h5 class="box-title">Email Address</h5>
                             <p class="box-text">
-                                <a href="mailto:info@examplemail.edu">info@examplemail.edu</a>
-                                <a href="mailto:admission@examplemail.edu">admission@examplemail.edu</a>
+                                @if($setting && $setting->email)
+                                    <a href="mailto:{{ $setting->email }}">{{ $setting->email }}</a>
+                                @else
+                                    <a href="mailto:info@examplemail.edu">info@examplemail.edu</a>
+                                @endif
+                                
+                                @if($setting && $setting->alt_email)
+                                    <a href="mailto:{{ $setting->alt_email }}">{{ $setting->alt_email }}</a>
+                                @else
+                                    <a href="mailto:admission@examplemail.edu">no email</a>
+                                @endif
                             </p>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--==============================
-Contact Area   
-==============================-->
+
+    {{-- Contact Area --}}
     <div class="space-bottom">
         <div class="container">
             <div class="row gx-0 gy-4">
@@ -109,14 +125,17 @@ Contact Area
             </div>
         </div>
     </div>
-<!--==============================
-Map Area  
-==============================-->
+
+    {{-- Map Area --}}
     <div class="">
         <div class="contact-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.7310056272386!2d89.2286059153658!3d24.00527418490799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe9b97badc6151%3A0x30b048c9fb2129bc!2sAngfuztheme!5e0!3m2!1sen!2sbd!4v1651028958211!5m2!1sen!2sbd" allowfullscreen="" loading="lazy"></iframe>
+            @if($setting && $setting->map_embed_url)
+                {!! $setting->map_embed_url !!}
+            @else
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.7310056272386!2d89.2286059153658!3d24.00527418490799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe9b97badc6151%3A0x30b048c9fb2129bc!2sAngfuztheme!5e0!3m2!1sen!2sbd!4v1651028958211!5m2!1sen!2sbd" allowfullscreen="" loading="lazy"></iframe>
+            @endif
             <div class="contact-icon">
-                <img src="assets/img/icon/location-dot.svg" alt="">
+                <img src="{{ asset('/') }}frontend/assets/img/icon/location-dot.svg" alt="">
             </div>
         </div>
     </div>

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Contacts\Pages;
+namespace App\Filament\Resources\Settings\Pages;
 
-use App\Filament\Resources\Contacts\ContactResource;
+use App\Filament\Resources\Settings\SettingsResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListContacts extends ListRecords
+class ListSettings extends ListRecords
 {
-    protected static string $resource = ContactResource::class;
+    protected static string $resource = SettingsResource::class;
 
     protected function getHeaderActions(): array
     {
