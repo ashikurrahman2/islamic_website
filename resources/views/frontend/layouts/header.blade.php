@@ -139,9 +139,8 @@
                                         <a href="#">ASSISTANCE</a>
                                         <ul class="sub-menu">
                                             <li><a href="{{ route('sult.pack') }}">Free Consultation</a></li>
-                                            <li><a href="courses-details.html">Air ticket booking</a></li>
-                                            <li><a href="courses-details.html">Haji & Umrah Training</a></li>
-                                            <li><a href="courses-details.html">VISA Processing</a></li>
+                                            <li><a href="{{ route('tick.air') }}">Air ticket booking</a></li>
+                                            <li><a href="{{ route('visa.pro') }}">VISA Processing</a></li>
                                         </ul>
                                     </li>
 

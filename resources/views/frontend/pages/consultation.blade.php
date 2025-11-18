@@ -29,53 +29,26 @@
             </div>
         </div>
 
-        <!-- Service Cards -->
-        <div class="row g-4">
-            <!-- Hajj Guidance Card -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center p-4 border-success">
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <i class="fa-solid fa-kaaba text-success" style="font-size: 3rem;"></i>
-                        </div>
-                        <h3 class="card-title text-success fw-bold mb-4">Hajj Guidance</h3>
-                        <p class="card-text text-dark lh-lg">
-                            Get personalized advice on Hajj planning, allowing you to focus on your spiritual journey without the stress.
-                        </p>
+        <!-- Consultation Cards -->
+      <div class="row g-4">
+    @foreach($consults as $consult)
+        <div class="col-lg-4 col-md-6">
+            <div class="card h-100 text-center p-4 border-success shadow-sm hover:shadow-lg transition-shadow duration-300">
+                <div class="card-body">
+                    <div class="mb-4">
+                        <i class="fa-solid {{ $consult->icon }} text-success" style="font-size: 3rem;"></i>
                     </div>
-                </div>
-            </div>
-
-            <!-- Umrah Support Card -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center p-4 border-success">
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <i class="fa-solid fa-mosque text-success" style="font-size: 3rem;"></i>
-                        </div>
-                        <h3 class="card-title text-success fw-bold mb-4">Umrah Support</h3>
-                        <p class="card-text text-dark lh-lg">
-                            Our experts will help you navigate the Umrah process, ensuring a fulfilling experience tailored to your needs.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Visa Assistance Card -->
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center p-4 border-success">
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <i class="fa-solid fa-passport text-success" style="font-size: 3rem;"></i>
-                        </div>
-                        <h3 class="card-title text-success fw-bold mb-4">Visa Assistance</h3>
-                        <p class="card-text text-dark lh-lg">
-                            Receive guidance on visa requirements and application processes to make your travel preparations smoother.
-                        </p>
-                    </div>
+                    <h3 class="card-title text-success fw-bold mb-4">
+                        {{ $consult->title }}
+                    </h3>
+                    <p class="card-text text-dark lh-lg">
+                        {{ $consult->description }}
+                    </p>
                 </div>
             </div>
         </div>
+    @endforeach
+</div>
     </div>
 
 @endsection

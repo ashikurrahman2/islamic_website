@@ -31,7 +31,7 @@
                     <div class="hero-inner">
                         <!-- Background Image -->
                         <div class="th-hero-bg" 
-                             data-bg-src="{{ asset($slide->slide_image) }}">
+                             data-bg-src="{{ Storage::url($slide->slide_image) }}">
                              	{{-- <img class="hero-thumb"
 								src="{{ asset('storage/' . $hero->person_image) }}"
 								alt="{{ $hero->name ?? 'Banner Image' }}"> --}}

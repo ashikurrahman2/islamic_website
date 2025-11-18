@@ -6,10 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\HajjDocument;
+use App\Models\Consultation;
 use App\Models\VisaRequirement;
+use App\Models\Gallery;
 use App\Models\HajjPackage;           
 use App\Models\UmrahPackage;           
 use App\Models\HajjSignificance;           
+use App\Models\VisaStat;           
 use App\Models\UmrahSignificance;           
 use App\Models\Settings;           
 use Barryvdh\DomPDF\Facade\Pdf;   
@@ -58,7 +61,8 @@ class FrontendController extends Controller
             $location = $ipInfo['city'] ?? 'Dhaka';
 
             $apiKey = env('WEATHER_API_KEY');
-            if (!$apiKey) return null;
+            if (!$apiKey) 
+                return null;
 
             $response = Http::timeout(5)->get("http://api.weatherapi.com/v1/astronomy.json", [
                 'key' => $apiKey,
@@ -73,7 +77,7 @@ class FrontendController extends Controller
             return null;
         }
     }
-
+    // Hijri date API
     private function getHijriDate()
     {
         try {
@@ -100,7 +104,7 @@ class FrontendController extends Controller
             return null;
         }
     }
-
+        //    About page
     public function About()
     {
         $hijriDate = $this->getHijriDate();
@@ -108,15 +112,18 @@ class FrontendController extends Controller
         $astronomy = $this->getAstronomy();
         return view('frontend.pages.about', compact('hijriDate', 'weather', 'astronomy'));
     }
-
+    // Gallery page
     public function Gallary()
     {
         $hijriDate = $this->getHijriDate();
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
-        return view('frontend.pages.gallery', compact('hijriDate', 'weather', 'astronomy'));
+           $galleries = Gallery::orderBy('created_at', 'desc')->get();
+        return view('frontend.pages.gallery', compact('hijriDate', 'galleries', 'weather', 'astronomy'));
     }
 
+
+    // Pre registration page 
     public function Pre()
     {
         $hijriDate = $this->getHijriDate();
@@ -232,12 +239,40 @@ public function downloadPdf($id)
         $hijriDate = $this->getHijriDate();
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
-        // $setting = \App\Models\Settings::first();
+        $consults = Consultation::all();
         
-        //  if (!$setting) {
-        //     abort(404, 'Contact page not found');
-        // }
-        return view('frontend.pages.consultation', compact('hijriDate','weather', 'astronomy'));
+         if (!$consults) {
+            abort(404, 'Consultation page not found');
+        }
+        return view('frontend.pages.consultation', compact('hijriDate', 'consults', 'weather', 'astronomy'));
     }
+
+        // Air ticket booking page 
+       public function Air()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+        // $consults = Consultation::all();
+        
+        //  if (!$consults) {
+        //     abort(404, 'Consultation page not found');
+        // }
+        return view('frontend.pages.booking', compact('hijriDate', 'weather', 'astronomy'));
+    }
+    //   Visa processing page
+        public function Provisa()
+     {
+        $hijriDate = $this->getHijriDate();
+        $weather = $this->getWeather();
+        $astronomy = $this->getAstronomy();
+       $visaStats = VisaStat::where('is_active', true)->latest()->get();
+        
+         if (!$visaStats) {
+            abort(404, 'Visa processing page not found');
+        }
+        return view('frontend.pages.visa_processing', compact('hijriDate', 'visaStats', 'weather', 'astronomy'));
+    }
+
   
 }
