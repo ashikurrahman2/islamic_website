@@ -56,8 +56,8 @@
 
                                 <!-- Buttons -->
                                 <div class="btn-group justify-content-center" data-ani="slideinup" data-ani-delay="0.8s">
-                                    <a href="#" class="th-btn style2">
-                                        <span class="btn-text" data-back="Our Services" data-front="Our Services"></span>
+                                    <a href="{{ route('cont.pack') }}" class="th-btn style2">
+                                        <span class="btn-text" data-back="Contact Us" data-front="Contact Us"></span>
                                     </a>
                                 </div>
                             </div>

@@ -27,8 +27,8 @@ class FrontendController extends Controller
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
         $hijriDate = $this->getHijriDate();
-
-        return view('frontend.pages.index', compact('sliders', 'hajjDocuments', 'weather', 'astronomy', 'hijriDate'));
+        $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+        return view('frontend.pages.index', compact('sliders', 'hajjDocuments', 'galleries', 'weather', 'astronomy', 'hijriDate'));
     }
 
     private function getWeather()
@@ -104,175 +104,182 @@ class FrontendController extends Controller
             return null;
         }
     }
-        //    About page
-    public function About()
-    {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-        return view('frontend.pages.about', compact('hijriDate', 'weather', 'astronomy'));
-    }
-    // Gallery page
-    public function Gallary()
-    {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-           $galleries = Gallery::orderBy('created_at', 'desc')->get();
-        return view('frontend.pages.gallery', compact('hijriDate', 'galleries', 'weather', 'astronomy'));
-    }
-
-
-    // Pre registration page 
-    public function Pre()
-    {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-
-        $hajjDocument = HajjDocument::with(['categories.items', 'notes'])
-            ->where('is_active', true)
-            ->latest()
-            ->first();
-
-        return view('frontend.pages.pre_ragistration', compact('hijriDate', 'hajjDocument', 'weather', 'astronomy'));
-    }
-
-    // Package Page
-    public function Pack()
-    {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-        $packages = HajjPackage::all(); 
-
-        return view('frontend.pages.hajj_package', compact('hijriDate', 'packages', 'weather', 'astronomy'));
-    }
-
-    // Package PDF Download
-public function downloadPdf($id)
-{
-    $package = HajjPackage::findOrFail($id);
-
-    $pdf = Pdf::loadView('frontend.pages.pdf.hajj-package', compact('package'))
-        ->setPaper('a4', 'portrait');
-
-    $fileName = Str::slug($package->title) . '-hajj-package-2026.pdf';
-
-    return $pdf->download($fileName);
-   }
-
-     // Significance Page
-     public function sign()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-          $significance = HajjSignificance::with('activeSteps')
-            ->where('is_active', true)
-            ->first();
-
-        if (!$significance) {
-            abort(404, 'Hajj Significance page not found');
+            // About page
+        public function About()
+        {
+            $hijriDate = $this->getHijriDate();
+            $weather = $this->getWeather();
+            $astronomy = $this->getAstronomy();
+                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+            return view('frontend.pages.about', compact('hijriDate', 'galleries', 'weather', 'astronomy'));
         }
-        return view('frontend.pages.significance', compact('hijriDate', 'significance', 'weather', 'astronomy'));
-    }
-
-      //Umrah Significance Page
-     public function umrahsign()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-         $significance = UmrahSignificance::with('activeSteps')->firstOrFail();
-
-        if (!$significance) {
-            abort(404, 'Umrah Significance page not found');
+        // Gallery page
+        public function Gallary()
+        {
+            $hijriDate = $this->getHijriDate();
+            $weather = $this->getWeather();
+            $astronomy = $this->getAstronomy();
+            $galleries = Gallery::orderBy('created_at', 'desc')->get();
+            return view('frontend.pages.gallery', compact('hijriDate', 'galleries', 'weather', 'astronomy'));
         }
-        return view('frontend.pages.umrah_significance', compact('hijriDate', 'significance', 'weather', 'astronomy'));
-    }
 
-       //    Umrah package
-       public function umrahpack()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-         $packages = UmrahPackage::all();
 
-        if (!$packages) {
-            abort(404, 'Umrah packages page not found');
+            // Pre registration page 
+            public function Pre()
+            {
+                $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+                    $galleries = Gallery::orderBy('created_at', 'desc')->get();
+
+                $hajjDocument = HajjDocument::with(['categories.items', 'notes'])
+                    ->where('is_active', true)
+                    ->latest()
+                    ->first();
+
+                return view('frontend.pages.pre_ragistration', compact('hijriDate', 'galleries', 'hajjDocument', 'weather', 'astronomy'));
+            }
+
+        // Package Page
+        public function Pack()
+        {
+            $hijriDate = $this->getHijriDate();
+            $weather = $this->getWeather();
+            $astronomy = $this->getAstronomy();
+            $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+            $packages = HajjPackage::all(); 
+
+            return view('frontend.pages.hajj_package', compact('hijriDate', 'packages', 'weather', 'astronomy', 'galleries'));
         }
-        return view('frontend.pages.umrah_package', compact('hijriDate', 'packages', 'weather', 'astronomy'));
-    }
 
-          // Visa requirement 
-       public function VISA()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-          $visaRequirement = VisaRequirement::where('is_active', true)->first();
-               if (!$visaRequirement) {
-            abort(404, 'VISA requirement page not found');
+            // Package PDF Download
+        public function downloadPdf($id)
+        {
+            $package = HajjPackage::findOrFail($id);
+
+            $pdf = Pdf::loadView('frontend.pages.pdf.hajj-package', compact('package'))
+                ->setPaper('a4', 'portrait');
+
+            $fileName = Str::slug($package->title) . '-hajj-package-2026.pdf';
+
+            return $pdf->download($fileName);
         }
-        return view('frontend.pages.visa_requirement', compact('hijriDate', 'visaRequirement', 'weather', 'astronomy'));
-    }
 
-            // Contact page 
-       public function commu()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-        $setting = \App\Models\Settings::first();
-        
-         if (!$setting) {
-            abort(404, 'Contact page not found');
+            // Significance Page
+            public function sign()
+        {
+            $hijriDate = $this->getHijriDate();
+            $weather = $this->getWeather();
+            $astronomy = $this->getAstronomy();
+            $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+            $significance = HajjSignificance::with('activeSteps')
+                ->where('is_active', true)
+                ->first();
+
+            if (!$significance) {
+                abort(404, 'Hajj Significance page not found');
+            }
+            return view('frontend.pages.significance', compact('hijriDate', 'significance', 'weather', 'astronomy', 'galleries'));
         }
-        return view('frontend.pages.contact', compact('hijriDate','weather', 'setting', 'astronomy'));
-    }
 
-            // Free consultation page 
-       public function Con()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-        $consults = Consultation::all();
-        
-         if (!$consults) {
-            abort(404, 'Consultation page not found');
+        //Umrah Significance Page
+        public function umrahsign()
+        {
+            $hijriDate = $this->getHijriDate();
+            $weather = $this->getWeather();
+            $astronomy = $this->getAstronomy();
+            $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+            $significance = UmrahSignificance::with('activeSteps')->firstOrFail();
+
+            if (!$significance) {
+                abort(404, 'Umrah Significance page not found');
+            }
+            return view('frontend.pages.umrah_significance', compact('hijriDate', 'significance', 'weather', 'astronomy', 'galleries'));
         }
-        return view('frontend.pages.consultation', compact('hijriDate', 'consults', 'weather', 'astronomy'));
-    }
 
-        // Air ticket booking page 
-       public function Air()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-        // $consults = Consultation::all();
-        
-        //  if (!$consults) {
-        //     abort(404, 'Consultation page not found');
-        // }
-        return view('frontend.pages.booking', compact('hijriDate', 'weather', 'astronomy'));
-    }
-    //   Visa processing page
-        public function Provisa()
-     {
-        $hijriDate = $this->getHijriDate();
-        $weather = $this->getWeather();
-        $astronomy = $this->getAstronomy();
-       $visaStats = VisaStat::where('is_active', true)->latest()->get();
-        
-         if (!$visaStats) {
-            abort(404, 'Visa processing page not found');
+        //    Umrah package
+        public function umrahpack()
+        {
+            $hijriDate = $this->getHijriDate();
+            $weather = $this->getWeather();
+            $astronomy = $this->getAstronomy();
+            $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+            $packages = UmrahPackage::all();
+
+            if (!$packages) {
+                abort(404, 'Umrah packages page not found');
+            }
+            return view('frontend.pages.umrah_package', compact('hijriDate', 'packages', 'weather', 'astronomy', 'galleries'));
         }
-        return view('frontend.pages.visa_processing', compact('hijriDate', 'visaStats', 'weather', 'astronomy'));
-    }
 
-  
+                // Visa requirement 
+            public function VISA()
+            {
+                $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+                $visaRequirement = VisaRequirement::where('is_active', true)->first();
+                
+                if (!$visaRequirement) {
+                    abort(404, 'VISA requirement page not found');
+                }
+                return view('frontend.pages.visa_requirement', compact('hijriDate', 'visaRequirement', 'weather', 'astronomy', 'galleries'));
+            }
+
+                // Contact page 
+            public function commu()
+            {
+                $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+                $setting = \App\Models\Settings::first();
+                
+                if (!$setting) {
+                    abort(404, 'Contact page not found');
+                }
+                return view('frontend.pages.contact', compact('hijriDate','weather', 'setting', 'astronomy', 'galleries'));
+            }
+
+        // Free consultation page 
+            public function Con()
+            {
+                $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+                $consults = Consultation::all();
+                
+                if (!$consults) {
+                    abort(404, 'Consultation page not found');
+                }
+                return view('frontend.pages.consultation', compact('hijriDate', 'consults', 'weather', 'astronomy', 'galleries'));
+            }
+
+            // Air ticket booking page 
+            public function Air()
+            {
+                $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+                
+                return view('frontend.pages.booking', compact('hijriDate', 'weather', 'astronomy', 'galleries'));
+            }
+
+            //   Visa processing page
+            public function Provisa()
+            {
+                $hijriDate = $this->getHijriDate();
+                $weather = $this->getWeather();
+                $astronomy = $this->getAstronomy();
+                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
+                $visaStats = VisaStat::where('is_active', true)->latest()->get();
+                
+                if (!$visaStats) {
+                    abort(404, 'Visa processing page not found');
+                }
+                return view('frontend.pages.visa_processing', compact('hijriDate', 'visaStats', 'weather', 'astronomy', 'galleries'));
+            }  
 }

@@ -80,37 +80,68 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-xl-auto">
-                        <div class="widget footer-widget">
-                            <h3 class="widget_title">Gallery</h3>
-                            <div class="sidebar-gallery">
-                                <div class="gallery-thumb">
-                                    <img src="assets/img/widget/gallery_1_1.jpg" alt="Gallery Image">
-                                    <a href="assets/img/widget/gallery_1_1.jpg" class="gallery-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="gallery-thumb">
-                                    <img src="assets/img/widget/gallery_1_2.jpg" alt="Gallery Image">
-                                    <a href="assets/img/widget/gallery_1_2.jpg" class="gallery-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="gallery-thumb">
-                                    <img src="assets/img/widget/gallery_1_3.jpg" alt="Gallery Image">
-                                    <a href="assets/img/widget/gallery_1_3.jpg" class="gallery-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="gallery-thumb">
-                                    <img src="assets/img/widget/gallery_1_4.jpg" alt="Gallery Image">
-                                    <a href="assets/img/widget/gallery_1_4.jpg" class="gallery-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="gallery-thumb">
-                                    <img src="assets/img/widget/gallery_1_5.jpg" alt="Gallery Image">
-                                    <a href="assets/img/widget/gallery_1_5.jpg" class="gallery-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                                <div class="gallery-thumb">
-                                    <img src="assets/img/widget/gallery_1_6.jpg" alt="Gallery Image">
-                                    <a href="assets/img/widget/gallery_1_6.jpg" class="gallery-btn popup-image"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
+<div class="col-md-6 col-xl-auto">
+    <div class="widget footer-widget">
+        <h3 class="widget_title">Gallery</h3>
+        <div class="sidebar-gallery">
+            @if(isset($galleries) && $galleries->isNotEmpty())
+                @foreach($galleries->take(6) as $gallery)
+                    <div class="gallery-thumb">
+                        @if($gallery->gallery_image)
+                            <img src="{{ asset('storage/' . $gallery->gallery_image) }}" alt="Gallery Image">
+                            <a href="{{ asset('storage/' . $gallery->gallery_image) }}" class="gallery-btn popup-image">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        @else
+                            <img src="{{ asset('frontend/assets/img/widget/gallery_1_1.jpg') }}" alt="Gallery Image">
+                            <a href="{{ asset('frontend/assets/img/widget/gallery_1_1.jpg') }}" class="gallery-btn popup-image">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        @endif
                     </div>
+                @endforeach
+            @else
+                {{-- Default images if no gallery exists --}}
+                <div class="gallery-thumb">
+                    <img src="{{ asset('frontend/assets/img/widget/gallery_1_1.jpg') }}" alt="Gallery Image">
+                    <a href="{{ asset('frontend/assets/img/widget/gallery_1_1.jpg') }}" class="gallery-btn popup-image">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="gallery-thumb">
+                    <img src="{{ asset('frontend/assets/img/widget/gallery_1_2.jpg') }}" alt="Gallery Image">
+                    <a href="{{ asset('frontend/assets/img/widget/gallery_1_2.jpg') }}" class="gallery-btn popup-image">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="gallery-thumb">
+                    <img src="{{ asset('frontend/assets/img/widget/gallery_1_3.jpg') }}" alt="Gallery Image">
+                    <a href="{{ asset('frontend/assets/img/widget/gallery_1_3.jpg') }}" class="gallery-btn popup-image">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="gallery-thumb">
+                    <img src="{{ asset('frontend/assets/img/widget/gallery_1_4.jpg') }}" alt="Gallery Image">
+                    <a href="{{ asset('frontend/assets/img/widget/gallery_1_4.jpg') }}" class="gallery-btn popup-image">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="gallery-thumb">
+                    <img src="{{ asset('frontend/assets/img/widget/gallery_1_5.jpg') }}" alt="Gallery Image">
+                    <a href="{{ asset('frontend/assets/img/widget/gallery_1_5.jpg') }}" class="gallery-btn popup-image">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                <div class="gallery-thumb">
+                    <img src="{{ asset('frontend/assets/img/widget/gallery_1_6.jpg') }}" alt="Gallery Image">
+                    <a href="{{ asset('frontend/assets/img/widget/gallery_1_6.jpg') }}" class="gallery-btn popup-image">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            @endif
+        </div>
+    </div>
+</div>
                 </div>
             </div>
         </div>
