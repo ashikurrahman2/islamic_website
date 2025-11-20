@@ -17,16 +17,11 @@ class SliderForm
                 ->required(),
                 TextInput::make('slide_subtitle')
                 ->required(),
-            //    FileUpload::make('slide_image')
-            //     ->image()
-            //     ->directory('slides') 
-            //     ->visibility('public')
-
-                   FileUpload::make('slide_image')
+            FileUpload::make('slide_image')
                     ->label('Slider Image')
                     ->image()
                     ->disk('public')
-                    ->directory('slides')
+                    ->directory('slider')
                     ->visibility('public')
                     ->getUploadedFileNameForStorageUsing(
                         fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
@@ -37,6 +32,22 @@ class SliderForm
                     ->imagePreviewHeight('250')
                     ->acceptedFileTypes(['image/*'])
                     ->maxSize(5120), 
+
+                //    FileUpload::make('slide_image')
+                //     ->label('Slider Image')
+                //     ->image()
+                //     ->disk('public')
+                //     ->directory('slides')
+                //     ->visibility('public')
+                //     ->getUploadedFileNameForStorageUsing(
+                //         fn (TemporaryUploadedFile $file): string => (string) str($file->getClientOriginalName())
+                //             ->prepend(now()->timestamp . '_')
+                //     )
+                //     ->downloadable()
+                //     ->openable()
+                //     ->imagePreviewHeight('250')
+                //     ->acceptedFileTypes(['image/*'])
+                //     ->maxSize(5120), 
             ]);
     }
 }

@@ -27,11 +27,12 @@ class FrontendController extends Controller
         $weather = $this->getWeather();
         $astronomy = $this->getAstronomy();
         $hijriDate = $this->getHijriDate();
+        $prayerTimes = $this->getPrayerTimes();
         $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
-        return view('frontend.pages.index', compact('sliders', 'hajjDocuments', 'galleries', 'weather', 'astronomy', 'hijriDate'));
+        return view('frontend.pages.index', compact('sliders', 'hajjDocuments', 'prayerTimes', 'galleries', 'weather', 'astronomy', 'hijriDate'));
     }
 
-    private function getWeather()
+    public function getWeather()
     {
         try {
             $ipInfo = Http::timeout(5)->get('http://ip-api.com/json')->json();
@@ -54,7 +55,7 @@ class FrontendController extends Controller
         }
     }
 
-    private function getAstronomy()
+    public function getAstronomy()
     {
         try {
             $ipInfo = Http::timeout(5)->get('http://ip-api.com/json')->json();
@@ -77,8 +78,53 @@ class FrontendController extends Controller
             return null;
         }
     }
+
+    // Add this method to FrontendController
+public function getPrayerTimes()
+{
+    try {
+        $ipInfo = Http::timeout(5)->get('http://ip-api.com/json')->json();
+        $latitude = $ipInfo['lat'] ?? 23.8103;
+        $longitude = $ipInfo['lon'] ?? 90.4125;
+
+        $cacheKey = 'prayer_times_' . md5($latitude . $longitude . now()->format('Y-m-d'));
+        
+        return \Cache::remember($cacheKey, now()->addDay(), function () use ($latitude, $longitude) {
+            $date = now()->format('d-m-Y');
+            $response = Http::timeout(5)->get("https://api.aladhan.com/v1/timings/{$date}", [
+                'latitude' => $latitude,
+                'longitude' => $longitude,
+                'method' => 5
+            ]);
+
+            if ($response->successful()) {
+                $data = $response->json('data.timings');
+                return [
+                    'Fajr' => $data['Fajr'],
+                    'Dhuhr' => $data['Dhuhr'],
+                    'Asr' => $data['Asr'],
+                    'Maghrib' => $data['Maghrib'],
+                    'Isha' => $data['Isha'],
+                    'Jummah' => $data['Jumuah'] ?? $data['Dhuhr'],
+                ];
+            }
+
+            return [
+                'Fajr' => '04:57',
+                'Dhuhr' => '11:55',
+                'Asr' => '03:05',
+                'Maghrib' => '05:20',
+                'Isha' => '06:44',
+                'Jummah' => '11:55',
+            ];
+        });
+    } catch (\Exception $e) {
+        \Log::error('Prayer Times Error: ' . $e->getMessage());
+        return null;
+    }
+}
     // Hijri date API
-    private function getHijriDate()
+    public function getHijriDate()
     {
         try {
             $today = now()->format('d-m-Y');
@@ -111,7 +157,8 @@ class FrontendController extends Controller
             $weather = $this->getWeather();
             $astronomy = $this->getAstronomy();
                 $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
-            return view('frontend.pages.about', compact('hijriDate', 'galleries', 'weather', 'astronomy'));
+                 $about = \App\Models\About::where('is_active', true)->first();
+            return view('frontend.pages.about', compact('hijriDate', 'galleries', 'about', 'weather', 'astronomy'));
         }
         // Gallery page
         public function Gallary()
@@ -255,17 +302,6 @@ class FrontendController extends Controller
                     abort(404, 'Consultation page not found');
                 }
                 return view('frontend.pages.consultation', compact('hijriDate', 'consults', 'weather', 'astronomy', 'galleries'));
-            }
-
-            // Air ticket booking page 
-            public function Air()
-            {
-                $hijriDate = $this->getHijriDate();
-                $weather = $this->getWeather();
-                $astronomy = $this->getAstronomy();
-                $galleries = Gallery::orderBy('created_at', 'desc')->limit(6)->get();
-                
-                return view('frontend.pages.booking', compact('hijriDate', 'weather', 'astronomy', 'galleries'));
             }
 
             //   Visa processing page

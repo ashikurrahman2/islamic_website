@@ -72,57 +72,59 @@
             <button data-slider-next="#heroSlide1" class="slider-arrow slider-next"><i class="far fa-arrow-right"></i></button>
         </div>
         <div class="dropdown-link">
-            <a class="dropdown-toggle user-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ asset('/') }}frontend/assets/img/icon/clock.svg" alt="img">Fajar- 6:19AM</a>
+<a class="dropdown-toggle user-toggle" href="#" role="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false">
+    <img src="{{ asset('/') }}frontend/assets/img/icon/clock.svg" alt="img">
+   ফজর - {{ $prayerTimes['Fajr'] }}
+</a>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1" data-popper-placement="bottom-end">
                 <li>
                     <span class="small-logo">
                         <img src="{{ asset('/') }}frontend/assets/img/small-logo.svg" alt="">
                     </span>
                 </li>
-            @php
-                // Auto-detect location from user IP (requires stevebauman/location package)
-                $position = \Stevebauman\Location\Facades\Location::get(request()->ip());
-                
-                // Fallback to Dhaka if detection fails
-                $latitude = $position ? $position->latitude : 23.8103;
-                $longitude = $position ? $position->longitude : 90.4125;
-                $timezone = $position ? $position->timezone : 'Asia/Dhaka';
+          @php
+    // Auto-detect location from user IP (requires stevebauman/location package)
+    $position = \Stevebauman\Location\Facades\Location::get(request()->ip());
+    
+    // Fallback to Dhaka if detection fails
+    $latitude = $position ? $position->latitude : 23.8103;
+    $longitude = $position ? $position->longitude : 90.4125;
+    $timezone = $position ? $position->timezone : 'Asia/Dhaka';
 
-                // Cache for 24 hours (daily prayer times)
-                $cacheKey = 'prayer_times_' . md5($latitude . $longitude . now()->format('Y-m-d'));
-                $timings = Cache::remember($cacheKey, now()->addDay(), function () use ($latitude, $longitude) {
-                    $date = now()->format('d-m-Y');
-                    $url = "https://api.aladhan.com/v1/timings/{$date}?latitude={$latitude}&longitude={$longitude}&method=5"; // Method 5: Egyptian General Authority (accurate for Bangladesh/South Asia)
+    // Cache for 24 hours (daily prayer times)
+    $cacheKey = 'prayer_times_' . md5($latitude . $longitude . now()->format('Y-m-d'));
+    $timings = Cache::remember($cacheKey, now()->addDay(), function () use ($latitude, $longitude) {
+        $date = now()->format('d-m-Y');
+        $url = "https://api.aladhan.com/v1/timings/{$date}?latitude={$latitude}&longitude={$longitude}&method=5";
 
-                    try {
-                        $response = \Illuminate\Support\Facades\Http::timeout(5)->get($url);
-                        if ($response->successful()) {
-                            $data = $response->json('data.timings');
-                            return [
-                                'Fajr' => $data['Fajr'],
-                                'Dhuhr' => $data['Dhuhr'],
-                                'Asr' => $data['Asr'],
-                                'Maghrib' => $data['Maghrib'],
-                                'Isha' => $data['Isha'],
-                                'Jummah' => $data['Jumuah'] ?? $data['Dhuhr'], // Jummah typically at Dhuhr time
-                            ];
-                        }
-                    } catch (\Exception $e) {
-                        \Log::error('Prayer API Error: ' . $e->getMessage());
-                    }
+        try {
+            $response = \Illuminate\Support\Facades\Http::timeout(5)->get($url);
+            if ($response->successful()) {
+                $data = $response->json('data.timings');
+                return [
+                    'Fajr' => $data['Fajr'],
+                    'Dhuhr' => $data['Dhuhr'],
+                    'Asr' => $data['Asr'],
+                    'Maghrib' => $data['Maghrib'],
+                    'Isha' => $data['Isha'],
+                    'Jummah' => $data['Jumuah'] ?? $data['Dhuhr'],
+                ];
+            }
+        } catch (\Exception $e) {
+            \Log::error('Prayer API Error: ' . $e->getMessage());
+        }
 
-                    // Fallback timings (Dhaka, approximate)
-                    return [
-                        'Fajr' => '04:57',
-                        'Dhuhr' => '11:55',
-                        'Asr' => '03:05',
-                        'Maghrib' => '05:20',
-                        'Isha' => '06:44',
-                        'Jummah' => '11:55',
-                    ];
-                });
-            @endphp
-
+        // Fallback timings (Dhaka, approximate)
+        return [
+            'Fajr' => '04:57',
+            'Dhuhr' => '11:55',
+            'Asr' => '03:05',
+            'Maghrib' => '05:20',
+            'Isha' => '06:44',
+            'Jummah' => '11:55',
+        ];
+    });
+@endphp
             <li>
                 <span><img src="{{ asset('/') }}frontend/assets/img/icon/clock.svg" alt="img">ফজর - {{ $timings['Fajr'] }}</span>
             </li>

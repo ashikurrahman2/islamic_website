@@ -13,7 +13,7 @@ class GalleryForm
         return $schema
             ->components([
                 FileUpload::make('gallery_image')
-                    ->label('Slider Image')
+                    ->label('Gallery Image')
                     ->image()
                     ->disk('public')
                     ->directory('gallery')

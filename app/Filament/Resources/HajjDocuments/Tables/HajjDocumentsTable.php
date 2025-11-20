@@ -8,6 +8,9 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Filters\SelectFilter;
+
 use Filament\Tables\Table;
 
 class HajjDocumentsTable
@@ -28,8 +31,11 @@ class HajjDocumentsTable
                     ->searchable(),
                 TextColumn::make('bottom_notice_line2')
                     ->searchable(),
-                IconColumn::make('is_active')
-                    ->boolean(),
+                // IconColumn::make('is_active')
+                //     ->boolean(),
+                       ToggleColumn::make('is_active')
+                    ->label('Active')
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -40,7 +46,12 @@ class HajjDocumentsTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                  SelectFilter::make('is_active')
+                    ->label('Status')
+                    ->options([
+                        1 => 'Active',
+                        0 => 'Inactive',
+                    ]),
             ])
             ->recordActions([
                 EditAction::make(),

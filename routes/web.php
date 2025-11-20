@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\FlightController;
+use App\Http\Controllers\Api\CountryController;
 
 
  // Homepage
@@ -17,7 +19,8 @@ use App\Http\Controllers\FrontendController;
     Route::get('/umrah-package', [FrontendController::class, 'umrahpack'])->name('umrah.pack');
     Route::get('/contact', [FrontendController::class, 'commu'])->name('cont.pack');
     Route::get('/consultation', [FrontendController::class, 'Con'])->name('sult.pack');
-    Route::get('/ticket-booking', [FrontendController::class, 'Air'])->name('tick.air');
     Route::get('/visa-processing', [FrontendController::class, 'Provisa'])->name('visa.pro');
-   
+  
+
+
   

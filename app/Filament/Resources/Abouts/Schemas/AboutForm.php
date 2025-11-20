@@ -6,6 +6,7 @@ use Filament\Forms\Components\FileUpload;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
 
 class AboutForm
@@ -47,6 +48,12 @@ class AboutForm
                 ->rows(5)
                 ->maxLength(1000)
                 ->placeholder('Write your vision here...'),
+
+                   Toggle::make('is_active') 
+                    ->label('Active Status')
+                    ->default(true)
+                    ->inline(false)
+                    ->helperText('Enable to show this content on the website'),
             ]);
     }
 }

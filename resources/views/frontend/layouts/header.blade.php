@@ -139,7 +139,6 @@
                                         <a href="#">ASSISTANCE</a>
                                         <ul class="sub-menu">
                                             <li><a href="{{ route('sult.pack') }}">Free Consultation</a></li>
-                                            <li><a href="{{ route('tick.air') }}">Air ticket booking</a></li>
                                             <li><a href="{{ route('visa.pro') }}">VISA Processing</a></li>
                                         </ul>
                                     </li>

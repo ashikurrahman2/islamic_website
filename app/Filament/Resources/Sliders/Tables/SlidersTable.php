@@ -19,7 +19,10 @@ class SlidersTable
                     ->searchable(),
                 TextColumn::make('slide_subtitle')
                     ->searchable(),
-                ImageColumn::make('slide_image'),
+                // ImageColumn::make('slide_image'),
+                     ImageColumn::make('slide_image')
+                  ->disk('public')
+                     ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
