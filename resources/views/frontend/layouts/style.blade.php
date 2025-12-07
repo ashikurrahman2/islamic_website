@@ -665,4 +665,166 @@
 
         
 
+    /* Ramadan Timing */
+     @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+        
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header-section .date {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .time-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .time-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .time-card.active {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 10px 60px rgba(16, 185, 129, 0.6); }
+        }
+        
+        .time-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #7e22ce;
+        }
+        
+        .time-card.active .time-icon {
+            color: white;
+        }
+        
+        .time-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .time-display {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .countdown-item {
+            text-align: center;
+            background: rgba(0,0,0,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 80px;
+        }
+        
+        .time-card.active .countdown-item {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .badge-active {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .badge-upcoming {
+            background: rgba(126, 34, 206, 0.2);
+            color: #7e22ce;
+        }
+        
+        .location-info {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 1.8rem;
+            }
+            .time-title {
+                font-size: 1.4rem;
+            }
+            .time-display {
+                font-size: 2rem;
+            }
+            .countdown-item {
+                min-width: 60px;
+                padding: 10px;
+            }
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+        }
     </style>

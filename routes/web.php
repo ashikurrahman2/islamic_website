@@ -20,7 +20,7 @@ use App\Http\Controllers\Api\CountryController;
     Route::get('/contact', [FrontendController::class, 'commu'])->name('cont.pack');
     Route::get('/consultation', [FrontendController::class, 'Con'])->name('sult.pack');
     Route::get('/visa-processing', [FrontendController::class, 'Provisa'])->name('visa.pro');
-  
 
-
+Route::get('/ramadan-timing', [FrontendController::class, 'ramadan'])->name('ramadan.timing');
+Route::get('/api/ramadan-prayer-times', [FrontendController::class, 'getAutoPrayerTimes']);
   
